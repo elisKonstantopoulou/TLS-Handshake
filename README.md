@@ -48,12 +48,14 @@ Client sends a message which contains, along with other things:
 - A list of cryptographic parameters for the key exchange with ECDHE or DHE
 - A PSK from a previous, safe communication
 
+---
 #### Server Hello
 The server replies by sending back to the client:
 - The TLS version they can both support
 - A random nuber (to avoid replay attacks)
 - One of the cipher suites from those the client has sent
 
+---
 #### Certificate – Server Key Exchange – Server Hello Done
 The server sends its certificate, which the client checks, and a **Server Key Exchange** which contains:
 - The parameters that will be used for the key exchange
@@ -66,6 +68,7 @@ In the following print screens we can see:
 ++add picture
 - The **Server Hello Done** message, which indicates that the server has finished sending everything it needs to send and is waiting for the client's response
 
+---
 #### Client Key Exchange – Change Cipher Spec - Encrypted Handshake Message
 The client verifies the server's digital signature with the server's public key, sends a respective **Client Key Exchange** message and then a **Change Cipher Spec** message. What this message does is let the server know that the client has everything they need to start sending encrypted messages with the agreed encryption algorithm and key length. 
 In the end, the client sends an **Encrypted Handshake** message, otherwise known as a **Finish** message. This message is a hash of all the previous messages, encrypted with the agreed algoritm and keys.
@@ -78,6 +81,7 @@ In the following print screens we can see:
 - The **Change Cipher Spec** message and the **Encrypted Handshake** (**Finish**) message
 ++add picture
 
+---
 #### New Session Ticket – Change Cipher Spec – Encrypted Handshake Message
 After the client has sent the Finish message, a _**New Session Ticket**_ message is sent, which contains a PSK (Pre Shared Key) which the client can use for future handshakes.
 ++add picture
@@ -87,8 +91,8 @@ The server then sends a **Change Cipher Spec** message, with which it informs th
 Finally, the server sends an **Encrypted Handshake** (**Finish**) message, respective to the one the client has sent. _**If the two Finish messages are not the same, then someone has infiltrated the communication**_.
 ++add picture
 
+---
 #### Application Data
 Once the TLS handshake is successfully completed and the parties are verified, the applications in the two ends can start communicating.
 ++add picture
-
 
