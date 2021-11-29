@@ -19,6 +19,7 @@ This will be analyzed in furhter detail later, but it is important to mention th
 
 ## TLS Handshake
 If we open up a webpage in a browser and click on the padlock icon next to the URL w can see that we have a TLS session. This means our browser and the server that hosts that specific webpage have established a TLS connectio, over TCP, which encrypts HTTP before it is delivered and received.
+
 <img src="/tls_screenshots/Screenshot_02.png" width=80%>
 
 If we take a look into the details we can actually see the **cipher suite**.
@@ -96,9 +97,11 @@ After the client has sent the Finish message, a _**New Session Ticket**_ message
 <img src="/tls_screenshots/Screenshot_10.png" width=70%>
 
 The server then sends a **Change Cipher Spec** message, with which it informs the client that they will now be communicating with the existing algorithm and keys, _with symmetric encryption_.
+
 <img src="/tls_screenshots/Screenshot_11.png" width=50%>
 
 Finally, the server sends an **Encrypted Handshake** (**Finish**) message, respective to the one the client has sent. _**If the two Finish messages are not the same, then someone has infiltrated the communication**_.
+
 <img src="/tls_screenshots/Screenshot_12.png" width=50%>
 
 ---
