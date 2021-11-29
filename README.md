@@ -5,9 +5,11 @@ This will provide insight on how the TLS handshake works and how we can analyze 
 Transport Layer Security (TLS for short) is an upgraded version of the Secure Socket Layer protocol (SSL for short). It is  cryptographic protocol that provides security in inetrnet communications.
 
 When a client requests for a webpage, for example, they are sending an HTTP message. This payload is encapsulated in a TCP packet, which is the encapsulated in an IP packet and in the end an Ethernet frame. To put it simply; headers are being added to the HTTP message:
-<img src="/tls_screenshots/Screenshot_00.png" width=70%>
+<img src="/tls_screenshots/Screenshot_00.png" width=50%>
+
 TLS is placed between the **application layer** (_which uses HTTP_) and the **transport layer** (_wich uses TCP_).
-<img src="/tls_screenshots/Screenshot_01.png" width=70%>
+
+<img src="/tls_screenshots/Screenshot_01.png" width=50%>
 
 TLS uses both symmetric and asymmetric encryption for the following purposes:
 - Asymmetric for server authentication; _**authentication**_
@@ -55,7 +57,7 @@ The server replies by sending back to the client:
 - The TLS version they can both support
 - A random nuber (to avoid replay attacks)
 - One of the cipher suites from those the client has sent
-<img src="/tls_screenshots/Screenshot_05.png" width=80%>
+<img src="/tls_screenshots/Screenshot_05.png" width=50%>
 
 ---
 #### Certificate – Server Key Exchange – Server Hello Done
@@ -66,8 +68,9 @@ The server sends its certificate, which the client checks, and a **Server Key Ex
 In the following print screens we can see:
 - Information about the server's cerificate  and how its digital signature was made (hash made with SHA384 and encrypted with RSA)
 <img src="/tls_screenshots/Screenshot_06.png" width=100%>
+
 - The aforementioned ECDH parameters
-<img src="/tls_screenshots/Screenshot_07.png" width=80%>
+<img src="/tls_screenshots/Screenshot_07.png" width=50%>
 
 - The **Server Hello Done** message, which indicates that the server has finished sending everything it needs to send and is waiting for the client's response
 
@@ -84,22 +87,23 @@ In the following print screens we can see:
 
 - The **Change Cipher Spec** message and the **Encrypted Handshake** (**Finish**) message
 
-<img src="/tls_screenshots/Screenshot_09.png" width=70%>
+<img src="/tls_screenshots/Screenshot_09.png" width=50%>
 
 ---
 #### New Session Ticket – Change Cipher Spec – Encrypted Handshake Message
 After the client has sent the Finish message, a _**New Session Ticket**_ message is sent, which contains a PSK (Pre Shared Key) which the client can use for future handshakes.
-<img src="/tls_screenshots/Screenshot_10.png" width=80%>
+
+<img src="/tls_screenshots/Screenshot_10.png" width=70%>
 
 The server then sends a **Change Cipher Spec** message, with which it informs the client that they will now be communicating with the existing algorithm and keys, _with symmetric encryption_.
-<img src="/tls_screenshots/Screenshot_11.png" width=70%>
+<img src="/tls_screenshots/Screenshot_11.png" width=50%>
 
 Finally, the server sends an **Encrypted Handshake** (**Finish**) message, respective to the one the client has sent. _**If the two Finish messages are not the same, then someone has infiltrated the communication**_.
-<img src="/tls_screenshots/Screenshot_12.png" width=70%>
+<img src="/tls_screenshots/Screenshot_12.png" width=50%>
 
 ---
 #### Application Data
 Once the TLS handshake is successfully completed and the parties are verified, the applications in the two ends can start communicating.
-<img src="/tls_screenshots/Screenshot_13.png" width=100%>
-<img src="/tls_screenshots/Screenshot_14.png" width=100%>
+<img src="/tls_screenshots/Screenshot_13.png" width=80%>
+<img src="/tls_screenshots/Screenshot_14.png" width=80%>
 
